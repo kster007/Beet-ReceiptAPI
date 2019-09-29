@@ -23,3 +23,16 @@ export $(cat example.env | xargs)
 $ java -jar ReceiptApi-0.0.1-SNAPSHOT.jar
 ```
 
+#Docker container
+Build
+```
+$ docker build -t ${image}:${version} .
+```
+
+Run
+```
+$ docker run --name receipt --net appnet -d -e STORE_ACCESS_KEY=shbfsjbfna -e STORE_SECRET_KEY=sjabdasnfsdf -e DB_URL=jdbc:mariadb://localhost:3306/test-local-db -e DB_USER=root -e DB_PASSWORD=welcome1 -e FLYWAY_USER=root -e FLYWAY_PASS=welcome1 -p 9001:9001 ${image}:${version}
+```
+
+
+
