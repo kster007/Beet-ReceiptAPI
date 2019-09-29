@@ -1,0 +1,26 @@
+server:
+  port: 9001
+logging: 
+  level:
+    com:
+      beet:
+        receipt: DEBUG 
+cloud:
+  aws:
+    credentials:
+      accessKey: ${STORE_ACCESS_KEY}
+      secretKey: ${STORE_SECRET_KEY}
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: true
+    show-sql: true
+  flyway:
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
