@@ -33,10 +33,10 @@ class ReceiptServiceImplTest {
 		Receipt expected = DomainObjectBuilder.aNew().receipt().build();
 		Ticket t = DomainObjectBuilder.aNew().ticket().build();
 		
-		Receipt actual = this.receiptService.createFromTicket(DomainObjectBuilder.prefix, t);
+		Receipt actual = this.receiptService.createFromTicket(DomainObjectBuilder.account, t);
 		
 		assertAll("Should compare the ticket and the status",
-			() -> assertEquals(expected.getPath(), DomainObjectBuilder.prefix),
+			() -> assertEquals(expected.getAccount(), DomainObjectBuilder.account),
 			() -> assertEquals(expected.getStatus(), actual.getStatus()),
 			() -> assertNotNull(actual.getTicket())
 		); 
@@ -45,13 +45,13 @@ class ReceiptServiceImplTest {
 	
 	@Test
 	void findByIdTestException() {
-		when(receiptRepository.findByIdAndPath(new Long(45), "kster")).thenThrow(RuntimeException.class);
+		when(receiptRepository.findByIdAndAccount(new Long(45), "kster")).thenThrow(RuntimeException.class);
 		assertThrows(InternalException.class, ()-> receiptService.findById("kster", new Long(45)), "Any error should had to return an InternalException");
 	}
 	
 	@Test
 	void findByIdTestValidationException() {
-		when(receiptRepository.findByIdAndPath(new Long(45), "kster")).thenReturn(null);
+		when(receiptRepository.findByIdAndAccount(new Long(45), "kster")).thenReturn(null);
 		assertThrows(ValidationException.class, ()-> receiptService.findById("kster", new Long(45)), "If the receipt does not exist a ValidationException should be throw");
 	}
 	

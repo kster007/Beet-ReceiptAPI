@@ -41,8 +41,8 @@ public class Receipt {
 	@Column(name="receipt_id")
 	private long id;
 	
-	@Column(name="path", nullable = false)
-	private String path;
+	@Column(name="account", nullable = false)
+	private String account;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="business_id")

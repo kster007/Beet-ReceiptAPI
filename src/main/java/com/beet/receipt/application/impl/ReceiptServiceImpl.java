@@ -29,7 +29,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 	public Receipt createFromTicket(String account, Ticket ticket) {
 		
 		Receipt receipt = new Receipt();
-		receipt.setPath(account);
+		receipt.setAccount(account);
 		receipt.setStatus(ReceiptStatus.IN_PROGRESS);
 		receipt.setTicket(ticket);
 		Receipt ret = this.receiptRepository.save(receipt);
@@ -40,7 +40,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 	@Override
 	public Receipt findById(String account, Long id) throws ReceiptException {	
 		try {
-			Receipt r = this.receiptRepository.findByIdAndPath(id, account);
+			Receipt r = this.receiptRepository.findByIdAndAccount(id, account);
 			if(r == null)
 				throw new ValidationException("Receipt not found");
 			return r;

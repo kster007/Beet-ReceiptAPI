@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class DomainObjectBuilder {
 	
-	public static final String prefix = "path";
+	public static final String account = "account";
 	public static final String filename = "filename";
 	public static final String originalFileName = "originalFileName";
 	public static final String contentType = "image/jpeg";

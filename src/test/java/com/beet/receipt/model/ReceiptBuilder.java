@@ -24,7 +24,7 @@ public class ReceiptBuilder {
 	private ReceiptStatus status;
 
 	public static ReceiptBuilder create() {
-		return new ReceiptBuilder(DomainObjectBuilder.prefix, null, DomainObjectBuilder.date,
+		return new ReceiptBuilder(DomainObjectBuilder.account, null, DomainObjectBuilder.date,
 				DomainObjectBuilder.amount, DomainObjectBuilder.dateTime, TicketBuilder.create().build(),
 				null, ReceiptStatus.IN_PROGRESS);
 	}

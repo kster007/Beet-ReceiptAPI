@@ -35,11 +35,11 @@ class RegisterServiceImplTest {
 		Ticket ticket = DomainObjectBuilder.aNew().ticket().build();
 		Receipt expected = DomainObjectBuilder.aNew().receipt().build();
 		
-		when(this.ticketService.createTicket(DomainObjectBuilder.prefix, file)).thenReturn(ticket);
+		when(this.ticketService.createTicket(DomainObjectBuilder.account, file)).thenReturn(ticket);
 		doNothing().when(this.fileStorageService).uploadFile(isA(String.class), isA(String.class), any());
 		when(this.receiptService.createFromTicket(any(String.class), any(Ticket.class))).thenReturn(expected);
 		
-		Receipt actual = this.registerService.registerReceiptFromImage(DomainObjectBuilder.prefix, file);
+		Receipt actual = this.registerService.registerReceiptFromImage(DomainObjectBuilder.account, file);
 		assertEquals(expected, actual);
 		
 	}
@@ -49,9 +49,9 @@ class RegisterServiceImplTest {
 		MultipartFile file =  DomainObjectBuilder.aNew().multiPartFile().build();
 		Ticket ticket = DomainObjectBuilder.aNew().ticket().build();
 		
-		when(this.ticketService.createTicket(DomainObjectBuilder.prefix, file)).thenReturn(ticket);
+		when(this.ticketService.createTicket(DomainObjectBuilder.account, file)).thenReturn(ticket);
 		doThrow(SdkClientException.class).when(this.fileStorageService).uploadFile(isA(String.class), isA(String.class), any());
-		assertThrows(InternalException.class, () -> this.registerService.registerReceiptFromImage(DomainObjectBuilder.prefix, file), "Any error should had to return an InternalException");
+		assertThrows(InternalException.class, () -> this.registerService.registerReceiptFromImage(DomainObjectBuilder.account, file), "Any error should had to return an InternalException");
 	}
 
 }

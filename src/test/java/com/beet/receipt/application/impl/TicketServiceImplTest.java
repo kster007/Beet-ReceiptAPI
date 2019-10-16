@@ -41,12 +41,12 @@ class TicketServiceImplTest {
 		MultipartFile multiPartFile = DomainObjectBuilder.aNew().multiPartFile().build();
 		Ticket expected = DomainObjectBuilder.aNew().ticket().build();
 		
-		Ticket actual = this.ticketService.createTicket(DomainObjectBuilder.prefix, multiPartFile);
+		Ticket actual = this.ticketService.createTicket(DomainObjectBuilder.account, multiPartFile);
 		assertAll("Should compare the components without the UUID", 
 			() -> assertEquals(expected.getImage().getName(), actual.getImage().getName()),
 			() -> assertEquals(expected.getImage().getContentType(), actual.getImage().getContentType()),
 			() -> assertEquals(expected.getImage().getSize(), actual.getImage().getSize()),
-			() -> assertTrue(actual.getImage().getKey().matches(DomainObjectBuilder.prefix + "/" + 
+			() -> assertTrue(actual.getImage().getKey().matches(DomainObjectBuilder.account + "/" + 
 														LocalDate.now() + "/" + TicketService.FILE_PREFIX + ".+"))
 		);
 		

@@ -24,7 +24,7 @@ public class FileInfoBuilder {
 	}
 	
 	public FileInfo build() {
-		FileInfo fi = FileInfo.generateFileKey(DomainObjectBuilder.prefix, TicketService.FILE_PREFIX);
+		FileInfo fi = FileInfo.generateFileKey(DomainObjectBuilder.account, TicketService.FILE_PREFIX);
 		fi.setContentType(contentType);
 		fi.setName(this.name);
 		fi.setSize(this.size);

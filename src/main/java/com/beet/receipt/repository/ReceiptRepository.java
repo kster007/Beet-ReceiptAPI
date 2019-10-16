@@ -7,5 +7,5 @@ import com.beet.receipt.model.entity.Receipt;
 
 @Repository
 public interface ReceiptRepository extends JpaRepository<Receipt, Long> {
-	Receipt findByIdAndPath(Long id, String path);
+	Receipt findByIdAndAccount(Long id, String account);
 }

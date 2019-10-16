@@ -32,8 +32,8 @@ class RegisterServiceFacadeImplTest {
 		Receipt receipt = DomainObjectBuilder.aNew().receipt().build();
 		MultipartFile file = DomainObjectBuilder.aNew().multiPartFile().build();
 		doReturn(receipt).when(this.registerService).registerReceiptFromImage(any(String.class), any());
-		ResponseEntity<Object> expected = new ResponseEntity<>(ReceiptAssembler.toReceiptDTO(DomainObjectBuilder.prefix,receipt), HttpStatus.CREATED);
-		ResponseEntity<Object> actual = this.registerServiceFacade.registerReceiptFromImage(DomainObjectBuilder.prefix, file);
+		ResponseEntity<Object> expected = new ResponseEntity<>(ReceiptAssembler.toReceiptDTO(DomainObjectBuilder.account,receipt), HttpStatus.CREATED);
+		ResponseEntity<Object> actual = this.registerServiceFacade.registerReceiptFromImage(DomainObjectBuilder.account, file);
 		assertEquals(expected, actual);
 	}
 	
@@ -43,7 +43,7 @@ class RegisterServiceFacadeImplTest {
 		MultipartFile file = DomainObjectBuilder.aNew().multiPartFile().build();
 		doThrow(InternalException.class).when(this.registerService).registerReceiptFromImage(any(String.class),any());
 		
-		ResponseEntity<Object> actual = this.registerServiceFacade.registerReceiptFromImage(DomainObjectBuilder.prefix, file);
+		ResponseEntity<Object> actual = this.registerServiceFacade.registerReceiptFromImage(DomainObjectBuilder.account, file);
 		
 		assertAll("In case of an error should had to return a controler error",
 				() -> assertEquals(actual.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR)

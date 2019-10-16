@@ -33,7 +33,7 @@ CREATE TABLE `business` (
 DROP TABLE IF EXISTS `receipt`;
 CREATE TABLE `receipt` (
 	`receipt_id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`path` varchar(255) NOT NULL,
+	`account` varchar(255) NOT NULL,
 	`business_id` bigint(20) DEFAULT NULL,
 	`date` datetime DEFAULT NULL,
 	`amount` bigint(20) DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `receipt` (
 	`invoice_id` bigint(20) DEFAULT NULL,
 	`status` ENUM('IN_PROGRESS','DONE','ERROR','NOT_APPLICABLE'),
 	PRIMARY KEY (`receipt_id`),
-	KEY `path_indx` (`path`),
+	KEY `account_indx` (`account`),
 	KEY `business_indx` (`business_id`),
 	CONSTRAINT `busines_constraint` FOREIGN KEY (`business_id`) REFERENCES `business` (`business_id`)
 );
