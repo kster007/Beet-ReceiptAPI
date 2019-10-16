@@ -23,7 +23,7 @@ export $(cat example.env | xargs)
 $ java -jar ReceiptApi-0.0.1-SNAPSHOT.jar
 ```
 
-#Docker container
+# Docker container
 Build
 ```
 $ docker build -t ${image}:${version} .
