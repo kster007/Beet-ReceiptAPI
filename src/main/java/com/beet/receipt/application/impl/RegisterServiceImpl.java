@@ -37,8 +37,8 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
-	public Receipt registerReceiptFromImage(String prefix, MultipartFile image) {
-		Ticket ticket = this.ticketService.createTicket(prefix, image);
+	public Receipt registerReceiptFromImage(String account, MultipartFile image) {
+		Ticket ticket = this.ticketService.createTicket(account, image);
 		try {
 			this.fileStorageService.uploadFile(BUCKET_NAME, ticket.getImage().getKey(), image.getResource());
 		} catch (AwsServiceException | SdkClientException | URISyntaxException | IOException e) {
@@ -46,7 +46,7 @@ public class RegisterServiceImpl implements RegisterService {
 			this.ticketService.deleteTicket(ticket);
 			throw new InternalException();
 		}
-		return this.receiptService.createFromTicket(prefix, ticket);
+		return this.receiptService.createFromTicket(account, ticket);
 	}
 
 }

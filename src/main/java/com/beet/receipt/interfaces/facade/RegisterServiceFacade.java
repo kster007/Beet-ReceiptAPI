@@ -5,5 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface RegisterServiceFacade {
 	
-	public ResponseEntity<Object> registerReceiptFromImage(String prefix, MultipartFile image);
+	public ResponseEntity<Object> registerReceiptFromImage(String account, MultipartFile image);
 }

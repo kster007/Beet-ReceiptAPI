@@ -6,9 +6,9 @@ import com.beet.receipt.interfaces.dto.FileDTO;
 
 public interface FileAssembler {
 
-	static FileDTO toFIleDTO(String prefix, MultipartFile file) {
+	static FileDTO toFIleDTO(String account, MultipartFile file) {
 		FileDTO ret = new FileDTO();
-		ret.setPrefix(prefix);
+		ret.setPrefix(account);
 		ret.setFile(file);
 		return ret;
 	}

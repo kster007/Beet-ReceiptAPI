@@ -1,5 +1,6 @@
 package com.beet.receipt.application.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,16 +15,15 @@ public class TicketServiceImpl implements TicketService {
 	
 	private TicketRepository ticketRepository;
 	
-	private static final String FILE_PREFIX = "TICKET";
-	
+	@Autowired
 	public TicketServiceImpl(TicketRepository ticketRepository) {
 		this.ticketRepository = ticketRepository;
 	}
 	
 	@Override
-	public Ticket createTicket(String prefix, MultipartFile file) {
+	public Ticket createTicket(String account, MultipartFile file) {
 		Ticket ticket = new Ticket();
-		FileInfo fileInfo = FileInfo.generateFileKey(prefix, FILE_PREFIX);
+		FileInfo fileInfo = FileInfo.generateFileKey(account, FILE_PREFIX);
 		fileInfo.setName(file.getOriginalFilename());
 		fileInfo.setContentType(file.getContentType());
 		fileInfo.setSize(file.getSize());

@@ -30,9 +30,9 @@ public class FileServiceFacadeImpl implements FileServiceFacade {
 	}
 	
 	@Override
-	public ResponseEntity<InputStreamResource> downloadTicket(String prefix, Long receiptId) {
+	public ResponseEntity<InputStreamResource> downloadTicket(String account, Long receiptId) {
 		try {
-			Receipt receipt = this.receiptService.findById(prefix, receiptId);
+			Receipt receipt = this.receiptService.findById(account, receiptId);
 			return this.download(receipt.getTicket().getImage());
 		}catch (ReceiptException e) {
 			return ResponseEntity.status(e.getStatusCode()).build();

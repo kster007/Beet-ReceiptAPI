@@ -22,7 +22,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.beet.receipt.model.value.ReceiptStatus;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
@@ -30,6 +32,8 @@ import lombok.ToString;
 @Table(name = "receipt")
 @ToString(exclude = {"id"})
 @EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Receipt {
 	
 	@Id

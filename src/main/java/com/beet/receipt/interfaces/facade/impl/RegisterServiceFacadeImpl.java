@@ -27,14 +27,14 @@ public class RegisterServiceFacadeImpl implements RegisterServiceFacade {
 	}
 	
 	@Override
-	public ResponseEntity<Object> registerReceiptFromImage(String prefix, MultipartFile image) {
+	public ResponseEntity<Object> registerReceiptFromImage(String account, MultipartFile image) {
 		
-		FileDTO file = FileAssembler.toFIleDTO(prefix, image);
+		FileDTO file = FileAssembler.toFIleDTO(account, image);
 		
 		ManageResponse<FileDTO, ReceiptDTO> manageResponse = new ManageResponse<>(HttpStatus.CREATED,
 			f -> { 
 				Receipt r = this.registerService.registerReceiptFromImage(f.getPrefix(), f.getFile());
-				return ReceiptAssembler.toReceiptDTO(r);
+				return ReceiptAssembler.toReceiptDTO(account, r);
 			} 
 		); 
 		

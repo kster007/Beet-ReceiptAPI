@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.beet.receipt.interfaces.dto.ReceiptDTO;
 import com.beet.receipt.interfaces.facade.FileServiceFacade;
 import com.beet.receipt.interfaces.facade.RegisterServiceFacade;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/ticket")
+@RequestMapping("/api/ticket")
 public class TicketController {
 	
 	private RegisterServiceFacade registerService;
@@ -29,19 +32,23 @@ public class TicketController {
 		this.receiptService = receiptService;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/{prefix}")
-	public ResponseEntity<Object> createReceipt(@PathVariable String prefix,
+	@RequestMapping(method = RequestMethod.POST, path = "/{account}")
+	@ApiOperation(value = "Create a Receipt",
+			notes= "Create a new Receipt in the account from a ticket image",
+			response = ReceiptDTO.class)
+	public ResponseEntity<Object> createReceipt(
+			@ApiParam(value = "Account number to register a new receipt", required = true) @PathVariable String account,
 												@RequestParam("file") MultipartFile file){
 		
 		log.info("fileSize: {}, name: {}, type: {}", file.getSize(), file.getOriginalFilename(), file.getContentType());
 		
-		return this.registerService.registerReceiptFromImage(prefix, file);
+		return this.registerService.registerReceiptFromImage(account, file);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/{prefix}")
-	public ResponseEntity<InputStreamResource> getTicket(@PathVariable String prefix, 
+	@RequestMapping(method = RequestMethod.GET, path = "/{account}")
+	public ResponseEntity<InputStreamResource> getTicket(@PathVariable String account, 
 										@RequestParam(name = "receipt", required = true) Long receiptId){
 		log.info("receipt: {}", receiptId);
-		return this.receiptService.downloadTicket(prefix, receiptId);
+		return this.receiptService.downloadTicket(account, receiptId);
 	}
 }

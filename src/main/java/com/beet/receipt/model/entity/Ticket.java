@@ -12,16 +12,18 @@ import javax.persistence.Table;
 
 import com.beet.receipt.model.value.FileInfo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
 @Table(name="ticket")
 @Data
 @ToString(exclude = {"id"}, includeFieldNames = false)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ticket {
-	
-	public static String FILE_PREFIX = "imgTicket";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

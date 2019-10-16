@@ -1,5 +1,6 @@
 package com.beet.receipt.application.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.beet.receipt.application.ReceiptService;
@@ -19,15 +20,16 @@ public class ReceiptServiceImpl implements ReceiptService {
 
 	private ReceiptRepository receiptRepository;
 	
+	@Autowired
 	public ReceiptServiceImpl(ReceiptRepository receiptRepository) {
 		this.receiptRepository = receiptRepository;
 	}
 	
 	@Override
-	public Receipt createFromTicket(String prefix, Ticket ticket) {
+	public Receipt createFromTicket(String account, Ticket ticket) {
 		
 		Receipt receipt = new Receipt();
-		receipt.setPath(prefix);
+		receipt.setPath(account);
 		receipt.setStatus(ReceiptStatus.IN_PROGRESS);
 		receipt.setTicket(ticket);
 		Receipt ret = this.receiptRepository.save(receipt);
@@ -36,17 +38,17 @@ public class ReceiptServiceImpl implements ReceiptService {
 	}
 
 	@Override
-	public Receipt findById(String prefix, Long id) throws ReceiptException {	
+	public Receipt findById(String account, Long id) throws ReceiptException {	
 		try {
-			Receipt r = this.receiptRepository.findByIdAndPath(id, prefix);
+			Receipt r = this.receiptRepository.findByIdAndPath(id, account);
 			if(r == null)
 				throw new ValidationException("Receipt not found");
 			return r;
 		}catch(ValidationException e) {
-			log.error("prefix: {} id: {}" +  id, prefix, e);
+			log.error("prefix: {} id: {}" +  id, account, e);
 			throw e;
 		}catch(Exception e) {
-			log.error("prefix: {} id: {}" + e.getMessage(), id, prefix, e);
+			log.error("prefix: {} id: {}" + e.getMessage(), id, account, e);
 			throw new InternalException();
 		}
 	}
