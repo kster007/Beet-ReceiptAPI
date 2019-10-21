@@ -31,4 +31,8 @@ public class DomainObjectBuilder {
 		return ReceiptBuilder.create();
 	}
 	
+	public ReceiptListBuilder receiptList(int size) {
+		return ReceiptListBuilder.create(size);
+	}
+	
 }

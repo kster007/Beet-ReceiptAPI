@@ -1,6 +1,8 @@
 package com.beet.receipt.application.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.beet.receipt.application.ReceiptService;
@@ -51,6 +53,11 @@ public class ReceiptServiceImpl implements ReceiptService {
 			log.error("prefix: {} id: {}" + e.getMessage(), id, account, e);
 			throw new InternalException();
 		}
+	}
+
+	@Override
+	public Page<Receipt> findByAccount(String account, Pageable pageable) {
+		return this.receiptRepository.findByAccount(account, pageable);
 	}
 
 }

@@ -51,8 +51,7 @@ class TicketControllerTest {
 	    		() -> assertEquals(response.getStatusCode(), HttpStatus.CREATED),
 	    		() -> assertNotNull(response.getBody().getCreatedAt()),
 	    		() -> assertEquals(response.getBody().getStatus(), "IN_PROGRESS"),
-	    		() -> assertEquals("/api/ticket/kster?receipt=1", response.getBody().getTicket().getUrl()),
-	    		() -> assertEquals(response.getBody().getId(), 1L)
+	    		() -> assertEquals("/api/ticket/kster?receipt=" + response.getBody().getId(), response.getBody().getTicket().getUrl())
 	    );
 	}
 

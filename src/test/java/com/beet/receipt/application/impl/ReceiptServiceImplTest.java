@@ -55,5 +55,4 @@ class ReceiptServiceImplTest {
 		assertThrows(ValidationException.class, ()-> receiptService.findById("kster", new Long(45)), "If the receipt does not exist a ValidationException should be throw");
 	}
 	
-
 }
