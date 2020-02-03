@@ -4,6 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+.bash_history
 mvnw
 mvnw.cmd
 .mvn/

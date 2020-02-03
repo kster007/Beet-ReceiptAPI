@@ -44,6 +44,7 @@ CREATE TABLE `receipt` (
 	PRIMARY KEY (`receipt_id`),
 	KEY `account_indx` (`account`),
 	KEY `business_indx` (`business_id`),
+	KEY `status_indx` (`status`),
 	CONSTRAINT `busines_constraint` FOREIGN KEY (`business_id`) REFERENCES `business` (`business_id`)
 );
 

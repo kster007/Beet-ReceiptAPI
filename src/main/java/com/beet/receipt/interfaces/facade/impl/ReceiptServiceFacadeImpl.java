@@ -38,4 +38,10 @@ public class ReceiptServiceFacadeImpl implements ReceiptServiceFacade {
 		return manageResponse.build(pageable);
 	}
 
+	@Override
+	public ResponseEntity<Object> getReceipt(String account, Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

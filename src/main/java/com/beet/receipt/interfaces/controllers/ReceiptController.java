@@ -42,7 +42,19 @@ public class ReceiptController {
 		
 		if(pageable == null) 
 			pageable = PageUtils.createFirstPage(Arrays.asList(Order.desc("created_at")));
-		
 		return receiptService.getReceipts(account, pageable);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/{account}/{id}")
+	@ApiOperation(value = "Return the receipts by id",
+	notes= "Return a receipts by account number and id",
+	response = ReceiptDTO.class)
+	public ResponseEntity<Object> getReceipt(
+			@ApiParam(value = "Account number to register a new receipt", required = true) @PathVariable String account,
+			@ApiParam(value = "Account number to register a new receipt", required = true) @PathVariable Long id){
+		log.info("Receipt, account: {}, id: {}", account, id);
+		
+		return receiptService.getReceipt(account, id);
+	}
+	
 }
